@@ -1,8 +1,10 @@
+import './Add-btn.css'
 
 const AddBtn = () => {
     return (
-        <div>
-            btn
+        <div className='add-btn'>
+            <span>+</span>
+            Add trip
         </div>
     )
 }

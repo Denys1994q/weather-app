@@ -3,7 +3,7 @@
 }
 
 .searchPanel input {
-    min-width: 230px;
+    min-width: 270px;
     background: url('../../imgs/search-icon.webp') no-repeat;
     background-size: 20px; 
     background-position: 10px center; 

@@ -1,0 +1,16 @@
+.add-btn {
+    font-size: 18px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.add-btn span {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 5px; 
+    font-weight: bold;
+}

@@ -1,6 +1,30 @@
 .home {
-    padding: 20px;
+    display: flex;
+    gap: 40px;
+    padding: 10px;
 }
+.home__trips {
+    /* width: 1000px; */
+}
+.home__todayWeather {
+    background: green;
+    width: 300px;
+}
+/* cardsPanel */
+.cardsPanel {
+    display: flex;
+    align-items: self-start;
+    flex-wrap: wrap;
+}
+.cardsPanel__cards {
+    width: 700px;
+    overflow-x: scroll; 
+}
+.cardsPanel__btn {
+    /* width: 100px;
+    height: 200px; */
+}
+
 .home__title {
     margin-bottom: 30px;
     font-size: 24px;
