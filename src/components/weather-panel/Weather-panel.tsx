@@ -1,8 +1,9 @@
+import Cards from "../cards/Cards"
 
 const WeatherPanel = () => {
     return (
         <div>
-            weather panel
+            <Cards />
         </div>
     )
 }
