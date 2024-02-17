@@ -53,7 +53,7 @@ const HomePage = () => {
                     <Banner />
                 </div>
             </section>
-            <CreateTripModal isOpen={isOpen} onClose={handleCloseModal} />
+            <CreateTripModal cities={cities} isOpen={isOpen} onClose={handleCloseModal} />
         </>
     );
 };

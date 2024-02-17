@@ -3,8 +3,9 @@ import "./CreateTrip-modal.css";
 import Select from "../inputs/select/Select";
 import DateInput from "../inputs/date-input/DateInput";
 import Button from "../btns/btn/Button";
+import { City } from "../../data/citiesData";
 
-const CreateTripModal = ({ isOpen, onClose }: any) => {
+const CreateTripModal = ({ isOpen, onClose, cities }: any) => {
     // Локальний стан для відстеження відкриття / закриття модального вікна
     const [isOpenModal, setIsOpenModal] = useState(isOpen);
 
@@ -17,6 +18,11 @@ const CreateTripModal = ({ isOpen, onClose }: any) => {
     useEffect(() => {
         setIsOpenModal(isOpen);
     }, [isOpen]);
+
+    const cityOptions = cities.map((city: City) => ({
+        value: city.city,
+        label: city.city
+      }));
 
     return (
         isOpenModal && (
@@ -32,10 +38,7 @@ const CreateTripModal = ({ isOpen, onClose }: any) => {
                         <Select 
                             label="City"
                             placeholder="Please select a city" 
-                            options={[
-                                {value: 'Berlin', label: 'Berlin'},
-                                {value: 'Kek', label: 'Kek'}
-                            ]} 
+                            options={cityOptions} 
                         />
                         <DateInput label="Start Date" placeholder="Select date"  />
                         <DateInput label="End Date" placeholder="Select date"  />
