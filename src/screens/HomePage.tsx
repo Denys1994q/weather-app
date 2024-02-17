@@ -3,6 +3,7 @@ import SearchPanel from "../components/search-panel/Search-panel";
 import Cards from "../components/city-cards/City-cards";
 import AddBtn from "../components/btns/add-btn/Add-btn";
 import ForecastCards from "../components/forecast-cards/Forecast-cards";
+import Banner from "../components/banner/Banner";
 
 // можна все зробити на хомпейдж і через пропси передавати в компоненти і отримувати
 // отримати інпут з пошуку, і передати в WeatherPanel нові дані
@@ -28,7 +29,9 @@ const HomePage = () => {
                     <ForecastCards />
                 </div>
             </div>
-            <div className='home__todayWeather'></div>
+            <div className='home__todayWeather'>
+                <Banner />
+            </div>
         </section>
     );
 };
