@@ -1,0 +1,20 @@
+.select-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+} 
+.select-label {
+    margin-bottom: 5px;
+} 
+.select-wrapper {
+    position: relative;
+}
+.custom-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d3d0d0;
+    border-radius: 5px;
+}
+.custom-select option:disabled {
+    color: #d3d0d0; 
+}
