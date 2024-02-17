@@ -1,4 +1,4 @@
-import './Add-btn.css'
+import "./Add-btn.css";
 
 const AddBtn = () => {
     return (
@@ -6,7 +6,7 @@ const AddBtn = () => {
             <span>+</span>
             Add trip
         </div>
-    )
-}
+    );
+};
 
-export default AddBtn
+export default AddBtn;

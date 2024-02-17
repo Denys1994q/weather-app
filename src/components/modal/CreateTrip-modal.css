@@ -29,7 +29,12 @@
     padding: 20px 20px 60px 20px;
     border-bottom: 1px solid #ddd;
 }
-  
+.modal__btns {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
 .close {
     position: absolute;
     top: 10px;

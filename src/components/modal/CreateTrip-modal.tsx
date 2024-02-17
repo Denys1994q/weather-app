@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./CreateTrip-modal.css";
 import Select from "../inputs/select/Select";
 import DateInput from "../inputs/date-input/DateInput";
+import Button from "../btns/btn/Button";
 
 const CreateTripModal = ({ isOpen, onClose }: any) => {
     // Локальний стан для відстеження відкриття / закриття модального вікна
@@ -39,7 +40,14 @@ const CreateTripModal = ({ isOpen, onClose }: any) => {
                         <DateInput label="Start Date" placeholder="Select date"  />
                         <DateInput label="End Date" placeholder="Select date"  />
                     </div>
-                    fdsf
+                    <div className="modal__btns">
+                        <Button type="outlined" onClick={() => console.log('Outlined button clicked')}>
+                            Cancel
+                        </Button>
+                        <Button type="primary" onClick={() => console.log('Primary button clicked')}>
+                            Save
+                        </Button>
+                    </div>
                 </div>
             </div>
         )

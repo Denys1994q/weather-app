@@ -19,34 +19,34 @@ const HomePage = () => {
     const handleCloseModal = () => {
         setIsOpen(false);
     };
-  
+
     return (
         <>
-        <section className='home'>
-            <div className='home__trips'>
-                <h1 className='home__title'>
-                    Weather <span>Forecast</span>
-                </h1>
-                <div className='home__searchPanel'>
-                <button onClick={handleOpenModal}>Відкрити модальне вікно</button>
-                    <SearchPanel />
-                </div>
-                <div className='home__cardsPanel cardsPanel'>
-                    <div className='cardsPanel__cards'>
-                        <Cards />
+            <section className='home'>
+                <div className='home__trips'>
+                    <h1 className='home__title'>
+                        Weather <span>Forecast</span>
+                    </h1>
+                    <div className='home__searchPanel'>
+                        <button onClick={handleOpenModal}>Відкрити модальне вікно</button>
+                        <SearchPanel />
                     </div>
-                    <button className='cardsPanel__btn'>
-                        <AddBtn />
-                    </button>
+                    <div className='home__cardsPanel cardsPanel'>
+                        <div className='cardsPanel__cards'>
+                            <Cards />
+                        </div>
+                        <button className='cardsPanel__btn'>
+                            <AddBtn />
+                        </button>
+                    </div>
+                    <div className='home__forecast'>
+                        <ForecastCards />
+                    </div>
                 </div>
-                <div className='home__forecast'>
-                    <ForecastCards />
+                <div className='home__todayWeather'>
+                    <Banner />
                 </div>
-            </div>
-            <div className='home__todayWeather'>
-                <Banner />
-            </div>
-        </section>
+            </section>
             <CreateTripModal isOpen={isOpen} onClose={handleCloseModal} />
         </>
     );
