@@ -19,7 +19,7 @@ const CreateTripModal = ({ isOpen, onClose }: any) => {
     }, [isOpen]);
 
     return (
-        true && (
+        isOpenModal && (
             <div className='modal'>
                 <div className='modal__inner'>
                     <header className='modal__header'>

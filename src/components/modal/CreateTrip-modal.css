@@ -8,8 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
+}
 .modal__inner {
     width: 550px;
     background-color: #fefefe; 
