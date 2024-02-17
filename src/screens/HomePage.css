@@ -1,6 +1,7 @@
 .home {
     display: flex;
-    gap: 40px;
+    justify-content: space-between;
+    /* gap: 20px; */
     padding: 10px;
 }
 .home__trips {
@@ -8,16 +9,20 @@
 }
 .home__todayWeather {
     background: green;
-    width: 300px;
+    width: 360px;
+}
+.home__forecast {
+    margin-top: 40px;
 }
 /* cardsPanel */
 .cardsPanel {
     display: flex;
+    gap: 20px;
     align-items: self-start;
     flex-wrap: wrap;
 }
 .cardsPanel__cards {
-    width: 700px;
+    width: 650px;
     overflow-x: scroll; 
 }
 .cardsPanel__btn {
@@ -26,7 +31,7 @@
 }
 
 .home__title {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 24px;
 }
 .home__title span {

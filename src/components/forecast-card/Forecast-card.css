@@ -1,0 +1,23 @@
+.forecast-card {
+    width: 90px;
+    height: 120px;
+    /* background: red; */
+    padding: 5px;
+}
+.forecast-card__title {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 5px;
+    color: rgb(153, 153, 153);
+}
+.forecast-card__img {
+    display: block;
+    margin: 10px auto;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+.forecast-card__temp {
+    text-align: center;
+    font-size: 12px;
+}

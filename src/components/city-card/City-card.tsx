@@ -1,6 +1,6 @@
-import './Card.css'
+import './City-card.css'
 
-const Card = () => {
+const CityCard = () => {
     return (
         <article className="card">
             <img className='card__img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29.jpg/1200px-Museumsinsel_Berlin_Juli_2021_1_%28cropped%29.jpg' alt="card-image" />
@@ -12,4 +12,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default CityCard
