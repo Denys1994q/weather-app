@@ -13,7 +13,7 @@ const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
     };
 
     const cityOptions = cities.map((city: City) => ({
-        value: city.city,
+        value: city.id,
         label: city.city
     }));
 

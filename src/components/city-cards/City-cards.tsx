@@ -9,7 +9,7 @@ interface CityCardsProps {
 const CityCards: React.FC<CityCardsProps> = ({cities}) => {
     return (
         <ul className="cards">
-            { cities.map(c => <li>
+            { cities.map(c => <li key={c.id}>
                 <CityCard 
                     img={c.img} 
                     title={c.city} 

@@ -9,11 +9,9 @@ import { useState } from "react";
 import { cities } from "../data/citiesData";
 import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
+import { addTrip } from "../store/slices/trips";
+import { City } from "../data/citiesData";
 
-// add trip немає ніякого відношення до апі, це все локально
-// апі починає працювати по кліку на карточку міста
-// є два списки, список всіх міст доступних і список вибраних міст для подорожей
-// add trip має взяти місто зі списку всіх і додати в список вибраних
 const HomePage = () => {
     const dispatch = useAppDispatch();
     const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +23,13 @@ const HomePage = () => {
     };
 
     const handleAddBtnClick = () => {
-        console.log("here");
         setIsOpen(true);
     };
 
     const handleSaveBtnClick = (formData: any) => {
-        console.log('parent', formData)
-    }
+        dispatch(addTrip(formData));
+        setIsOpen(false);
+    };
 
     return (
         <>
@@ -47,9 +45,9 @@ const HomePage = () => {
                         <div className='cardsPanel__cards'>
                             <Cards cities={trips} />
                         </div>
-                        <button className='cardsPanel__btn'>
+                        <div className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
-                        </button>
+                        </div>
                     </div>
                     <div className='home__forecast'>
                         <ForecastCards />
@@ -59,11 +57,12 @@ const HomePage = () => {
                     <Banner />
                 </div>
             </section>
-            <CreateTripModal 
-                cities={cities} 
-                isOpen={isOpen} 
+            <CreateTripModal
+                cities={cities}
+                isOpen={isOpen}
                 onSaveBtnClick={handleSaveBtnClick}
-                onClose={handleCloseModal} />
+                onClose={handleCloseModal}
+            />
         </>
     );
 };
