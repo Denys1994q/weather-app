@@ -22,7 +22,7 @@
 }
 .cardsPanel__cards {
     width: 650px;
-    overflow-x: scroll; 
+    overflow-x: auto; 
 }
 .cardsPanel__btn {
     /* width: 100px;

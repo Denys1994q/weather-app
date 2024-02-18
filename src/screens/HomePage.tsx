@@ -7,16 +7,18 @@ import Banner from "../components/banner/Banner";
 import CreateTripModal from "../components/modal/CreateTrip-modal";
 import { useState } from "react";
 import { cities } from "../data/citiesData";
+import { useAppDispatch } from "../store/hooks";
+import { useAppSelector } from "../store/hooks";
 
-// можна все зробити на хомпейдж і через пропси передавати в компоненти і отримувати
-// отримати інпут з пошуку, і передати в WeatherPanel нові дані
+// add trip немає ніякого відношення до апі, це все локально
+// апі починає працювати по кліку на карточку міста
+// є два списки, список всіх міст доступних і список вибраних міст для подорожей
+// add trip має взяти місто зі списку всіх і додати в список вибраних
 const HomePage = () => {
+    const dispatch = useAppDispatch();
     const [isOpen, setIsOpen] = useState(false);
-    // add trip немає ніякого відношення до апі, це все локально
-    // апі починає працювати по кліку на карточку міста
 
-    // є два списки, список всіх міст доступних і список вибраних міст для подорожей
-    // add trip має взяти місто зі списку всіх і додати в список вибраних
+    const trips = useAppSelector(store => store.trips.trips);
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -26,6 +28,10 @@ const HomePage = () => {
         console.log("here");
         setIsOpen(true);
     };
+
+    const handleSaveBtnClick = () => {
+        console.log('parent')
+    }
 
     return (
         <>
@@ -39,7 +45,7 @@ const HomePage = () => {
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
-                            <Cards cities={cities} />
+                            <Cards cities={trips} />
                         </div>
                         <button className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
@@ -53,7 +59,11 @@ const HomePage = () => {
                     <Banner />
                 </div>
             </section>
-            <CreateTripModal cities={cities} isOpen={isOpen} onClose={handleCloseModal} />
+            <CreateTripModal 
+                cities={cities} 
+                isOpen={isOpen} 
+                onSaveBtnClick={handleSaveBtnClick}
+                onClose={handleCloseModal} />
         </>
     );
 };

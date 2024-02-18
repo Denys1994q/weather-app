@@ -5,7 +5,7 @@ import DateInput from "../inputs/date-input/DateInput";
 import Button from "../btns/btn/Button";
 import { City } from "../../data/citiesData";
 
-const CreateTripModal = ({ isOpen, onClose, cities }: any) => {
+const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
     // Локальний стан для відстеження відкриття / закриття модального вікна
     const [isOpenModal, setIsOpenModal] = useState(isOpen);
 
@@ -22,7 +22,7 @@ const CreateTripModal = ({ isOpen, onClose, cities }: any) => {
     const cityOptions = cities.map((city: City) => ({
         value: city.city,
         label: city.city
-      }));
+    }));
 
     return (
         isOpenModal && (
@@ -47,7 +47,7 @@ const CreateTripModal = ({ isOpen, onClose, cities }: any) => {
                         <Button type="outlined" onClick={() => console.log('Outlined button clicked')}>
                             Cancel
                         </Button>
-                        <Button type="primary" onClick={() => console.log('Primary button clicked')}>
+                        <Button type="primary" onClick={onSaveBtnClick}>
                             Save
                         </Button>
                     </div>
