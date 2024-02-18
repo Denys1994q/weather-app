@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
+// import * as Yup from "yup";
 import "./CreateTrip-modal.css";
 import Select from "../inputs/select/Select";
 import DateInput from "../inputs/date-input/DateInput";
@@ -34,24 +35,26 @@ const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
                                 onSaveBtnClick(values);
                             }}
                         >
-                            <Form>
-                                <Select 
-                                    label="City"
-                                    placeholder="Please select a city" 
-                                    options={cityOptions} 
-                                    name="city"
-                                />
-                                <DateInput label="Start Date" placeholder="Select date" fieldName="startDate" />
-                                <DateInput label="End Date" placeholder="Select date" fieldName="endDate" />
-                                <div className="modal__btns">
-                                    <Button variant="outlined" buttonType="button" onClick={handleClose}>
-                                        Cancel
-                                    </Button>
-                                    <Button variant="primary" buttonType="submit">
-                                        Save
-                                    </Button>
-                                </div>
-                            </Form>
+                            {({ isValid }) => (
+                                <Form>
+                                    <Select 
+                                        label="City"
+                                        placeholder="Please select a city" 
+                                        options={cityOptions} 
+                                        name="city"
+                                    />
+                                    <DateInput label="Start Date" placeholder="Select date" fieldName="startDate" />
+                                    <DateInput label="End Date" placeholder="Select date" fieldName="endDate" />
+                                    <div className="modal__btns">
+                                        <Button variant="outlined" buttonType="button" onClick={handleClose}>
+                                            Cancel
+                                        </Button>
+                                        <Button variant="primary" buttonType="submit" disabled={!isValid}>
+                                            Save
+                                        </Button>
+                                    </div>
+                                </Form>
+                            )}
                         </Formik>
                     </div>
                 </div>
