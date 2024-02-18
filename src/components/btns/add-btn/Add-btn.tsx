@@ -1,11 +1,11 @@
 import "./Add-btn.css";
 
-const AddBtn = () => {
+const AddBtn = ({ onAddBtnClick }: any) => {
     return (
-        <div className='add-btn'>
+        <button className='add-btn' onClick={onAddBtnClick}>
             <span>+</span>
             Add trip
-        </div>
+        </button>
     );
 };
 

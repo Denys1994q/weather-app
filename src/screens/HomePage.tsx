@@ -18,12 +18,13 @@ const HomePage = () => {
     // є два списки, список всіх міст доступних і список вибраних міст для подорожей
     // add trip має взяти місто зі списку всіх і додати в список вибраних
 
-    const handleOpenModal = () => {
-        setIsOpen(true);
-    };
-
     const handleCloseModal = () => {
         setIsOpen(false);
+    };
+
+    const handleAddBtnClick = () => {
+        console.log("here");
+        setIsOpen(true);
     };
 
     return (
@@ -34,7 +35,6 @@ const HomePage = () => {
                         Weather <span>Forecast</span>
                     </h1>
                     <div className='home__searchPanel'>
-                        <button onClick={handleOpenModal}>Відкрити модальне вікно</button>
                         <SearchPanel />
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
@@ -42,7 +42,7 @@ const HomePage = () => {
                             <Cards cities={cities} />
                         </div>
                         <button className='cardsPanel__btn'>
-                            <AddBtn />
+                            <AddBtn onAddBtnClick={handleAddBtnClick} />
                         </button>
                     </div>
                     <div className='home__forecast'>
