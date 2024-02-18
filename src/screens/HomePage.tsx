@@ -29,8 +29,8 @@ const HomePage = () => {
         setIsOpen(true);
     };
 
-    const handleSaveBtnClick = () => {
-        console.log('parent')
+    const handleSaveBtnClick = (formData: any) => {
+        console.log('parent', formData)
     }
 
     return (
