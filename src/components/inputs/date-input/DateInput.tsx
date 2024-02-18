@@ -6,11 +6,11 @@ import Label from "../label/Label";
 interface DateInputProps {
     label: string;
     placeholder: string;
-    fieldName: string;
+    name: string; // Змінено з fieldName на name
 }
 
-const DateInput: React.FC<DateInputProps> = ({ label, fieldName, placeholder }) => {
-    const [field, , helpers] = useField(fieldName);
+const DateInput: React.FC<DateInputProps> = ({ label, name, placeholder }) => { // Змінено з fieldName на name
+    const [field, , helpers] = useField(name); // Змінено з fieldName на name
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         helpers.setValue(event.target.value);

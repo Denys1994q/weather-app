@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import "./CreateTrip-modal.css";
 import Select from "../inputs/select/Select";
 import DateInput from "../inputs/date-input/DateInput";
@@ -34,17 +34,33 @@ const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
                             onSubmit={(values) => {
                                 onSaveBtnClick(values);
                             }}
+                            validationSchema={Yup.object().shape({
+                                city: Yup.string().required("City is required"),
+                                startDate: Yup.date().required("Start Date is required"),
+                                endDate: Yup.date().required("End Date is required"),
+                            })}
+                            validateOnMount={true} 
                         >
-                            {({ isValid }) => (
+                            {({ isValid, errors }) => (
                                 <Form>
-                                    <Select 
+                                    <Field name="city" as={Select} label="City" placeholder="Please select a city" options={cityOptions} />
+                                    <Field name="startDate" as={DateInput} label="Start Date" placeholder="Select date" />
+                                    <Field name="endDate" as={DateInput} label="End Date" placeholder="Select date" />
+                                    {<div>{errors.city}</div>}
+                                    {<div>{errors.startDate}</div>}
+                                    {<div>{errors.endDate}</div>}
+                                     <>
+                                     {console.log('Form is valid:', isValid)}
+                                     </>
+                                     
+                                    {/* <Select 
                                         label="City"
                                         placeholder="Please select a city" 
                                         options={cityOptions} 
                                         name="city"
-                                    />
-                                    <DateInput label="Start Date" placeholder="Select date" fieldName="startDate" />
-                                    <DateInput label="End Date" placeholder="Select date" fieldName="endDate" />
+                                    /> */}
+                                    {/* <DateInput label="Start Date" placeholder="Select date" fieldName="startDate" />
+                                    <DateInput label="End Date" placeholder="Select date" fieldName="endDate" /> */}
                                     <div className="modal__btns">
                                         <Button variant="outlined" buttonType="button" onClick={handleClose}>
                                             Cancel
