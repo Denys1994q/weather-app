@@ -1,6 +1,7 @@
 .card {
     width: 200px;
     height: 250px;
+    cursor: pointer;
 }
 .card__img {
     width: 100%;
@@ -9,7 +10,8 @@
 }
 .card__info {
     padding: 20px;
-    border: 1px solid rgb(224, 224, 224);
+    border: 2px solid rgb(224, 224, 224);
+    border-top: 2px solid transparent
 }
 .card__title {
     font-size: 14px;
@@ -18,4 +20,8 @@
 }
 .card__date {
     color: rgb(153, 153, 153);
+}
+.card__info.active {
+    border: 2px solid rgb(151, 225, 243);
+    border-top: 2px solid transparent
 }

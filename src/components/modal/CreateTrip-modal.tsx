@@ -41,26 +41,11 @@ const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
                             })}
                             validateOnMount={true} 
                         >
-                            {({ isValid, errors }) => (
+                            {({ isValid }) => (
                                 <Form>
                                     <Field name="city" as={Select} label="City" placeholder="Please select a city" options={cityOptions} />
                                     <Field name="startDate" as={DateInput} label="Start Date" placeholder="Select date" />
                                     <Field name="endDate" as={DateInput} label="End Date" placeholder="Select date" />
-                                    {<div>{errors.city}</div>}
-                                    {<div>{errors.startDate}</div>}
-                                    {<div>{errors.endDate}</div>}
-                                     <>
-                                     {console.log('Form is valid:', isValid)}
-                                     </>
-                                     
-                                    {/* <Select 
-                                        label="City"
-                                        placeholder="Please select a city" 
-                                        options={cityOptions} 
-                                        name="city"
-                                    /> */}
-                                    {/* <DateInput label="Start Date" placeholder="Select date" fieldName="startDate" />
-                                    <DateInput label="End Date" placeholder="Select date" fieldName="endDate" /> */}
                                     <div className="modal__btns">
                                         <Button variant="outlined" buttonType="button" onClick={handleClose}>
                                             Cancel

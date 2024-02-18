@@ -1,6 +1,6 @@
 import "./HomePage.css";
 import SearchPanel from "../components/search-panel/Search-panel";
-import Cards from "../components/city-cards/City-cards";
+import CityCards from "../components/city-cards/City-cards";
 import AddBtn from "../components/btns/add-btn/Add-btn";
 import ForecastCards from "../components/forecast-cards/Forecast-cards";
 import Banner from "../components/banner/Banner";
@@ -17,6 +17,14 @@ const HomePage = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const trips = useAppSelector(store => store.trips.trips);
+    const [tripId, setTripId] = useState('')
+
+    // const selectedTrip = trips.find()
+
+    // по кліку треба відправити запит і результати запиту записати в масив trips в потрібний об'єкт
+    // а далі просто передавати з selectedTrip.todayWeather в Banner. selectedTripWeekWeather в Cards
+
+    // useEffect() [tripId]
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -31,6 +39,11 @@ const HomePage = () => {
         setIsOpen(false);
     };
 
+    const handleCityClick = (id: string) => {
+        setTripId(id)
+        console.log(id)
+    }
+
     return (
         <>
             <section className='home'>
@@ -43,7 +56,10 @@ const HomePage = () => {
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
-                            <Cards cities={trips} />
+                            <CityCards 
+                                cities={trips} 
+                                activeCityId={tripId}
+                                onCityClick={handleCityClick} />
                         </div>
                         <div className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
