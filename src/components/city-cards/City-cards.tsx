@@ -1,6 +1,7 @@
 import './City-cards.css'
 import CityCard from '../city-card/City-card'
 import { City } from '../../data/citiesData'
+import transformDate from '../../utils/dateUtils'
 
 interface CityCardsProps {
     cities: City[];
@@ -18,8 +19,8 @@ const CityCards: React.FC<CityCardsProps> = ({cities, activeCityId, onCityClick}
                 <CityCard 
                     img={c.img} 
                     title={c.city} 
-                    startDate={c.startDate}
-                    endDate={c.endDate}
+                    startDate={transformDate(c.startDate)}
+                    endDate={transformDate(c.endDate)}
                     isActive={c.id === activeCityId} 
                     onClick={() => handleCityClick(c.id)} />
                 </li>

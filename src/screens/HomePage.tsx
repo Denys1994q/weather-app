@@ -36,6 +36,8 @@ const HomePage = () => {
     useEffect(() => {
         console.log("here");       
         dispatch(getTodaysWeather({ city: selectedTrip.city }));
+        console.log(selectedTrip.startDate)
+        // тут навпаки нічого не треба трансформуваи, апі так і хоче приймати як є, тільки у відображенні треба трансформувати
         // dispatch(
         //     getWeekWeather({
         //         city: selectedTrip.city,
@@ -66,9 +68,6 @@ const HomePage = () => {
     const handleSearchChange = (newValue: any) => {
         dispatch(setActiveFilter(newValue))
     };
-
-    const targetDateParts = '29.02.2024'.split('.').map(part => parseInt(part, 10));
-    const targetDate = new Date(targetDateParts[2], targetDateParts[1] - 1, targetDateParts[0]);
 
     return (
         <>
@@ -104,7 +103,7 @@ const HomePage = () => {
                             day={dayOfWeek}
                             temp={Math.floor(selectedTrip.todayWeather.temp)}
                             icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`}
-                            targetDate={targetDate.toISOString()}
+                            deadline={`${selectedTrip.startDate} 00:00`}
                         />
                     ) : null}
                 </div>

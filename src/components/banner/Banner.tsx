@@ -6,21 +6,21 @@ interface BannerProps {
     icon: string,
     city: string,
     day: string,
-    targetDate: string
+    deadline: string
 }
 
-const Banner: React.FC<BannerProps> = ({temp, icon, day, city, targetDate}) => {
+const Banner: React.FC<BannerProps> = ({temp, icon, day, city, deadline}) => {
     return (
         <div className='banner'>
             <div className='banner__inner'>
                 <h2 className='banner__title'>{day}</h2>
                 <div className='banner__iconBlock'>
                     <img className='banner__icon' src={icon} alt="banner-icon" />
-                    <p className='banner_iconText'>{temp}°C</p>
+                    <p className='banner_iconText'>{temp}<span>°C</span></p>
                 </div>
                 <p className='banner__subtitle'>{city}</p>
                 <div className='banner__timer'>
-                    <Timer targetDate={targetDate} />
+                    <Timer deadline={deadline} />
                 </div>
             </div>
         </div>
