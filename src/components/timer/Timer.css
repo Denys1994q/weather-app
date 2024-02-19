@@ -1,0 +1,22 @@
+.timerBlock {
+    width: 320px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.timerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.timerNumber {
+    font-weight: bold;
+    font-size: 30px;
+}  
+.timerLabel {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+  

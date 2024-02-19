@@ -15,6 +15,7 @@ import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
 import transformDate from "../utils/dateUtils";
 import Spinner from "../components/spinner/Spinner";
 import Error from "../components/error/Error";
+import Timer from "../components/timer/Timer";
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
@@ -66,6 +67,9 @@ const HomePage = () => {
         dispatch(setActiveFilter(newValue))
     };
 
+    const targetDateParts = '29.02.2024'.split('.').map(part => parseInt(part, 10));
+    const targetDate = new Date(targetDateParts[2], targetDateParts[1] - 1, targetDateParts[0]);
+
     return (
         <>
             <section className='home'>
@@ -100,6 +104,7 @@ const HomePage = () => {
                             day={dayOfWeek}
                             temp={Math.floor(selectedTrip.todayWeather.temp)}
                             icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`}
+                            targetDate={targetDate.toISOString()}
                         />
                     ) : null}
                 </div>

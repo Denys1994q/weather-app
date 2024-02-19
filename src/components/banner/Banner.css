@@ -16,7 +16,7 @@
 /* icon block */
 .banner__iconBlock {
     display: flex;
-    gap: 10px;
+    justify-content: center;
     margin-bottom: 10px;
     position: relative;
 }
@@ -26,7 +26,7 @@
     object-fit: contain;
     position: absolute;
     top: 0;
-    left: -80%;
+    left: -40%;
 }
 .banner_iconText {
     font-size: 62px;
@@ -35,4 +35,8 @@
 .banner__subtitle {
     font-size: 32px;
     text-align: center;
+}
+/* timer */
+.banner__timer {
+    margin-top: 60px;
 }
