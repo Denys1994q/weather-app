@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     color: white;
-    background: rgb(30, 10, 56);
+    background: rgb(45,42,91);
+    background: linear-gradient(90deg, rgba(45,42,91,1) 27%, rgba(7,7,59,1) 54%);
 }
 .banner__title {
     font-weight: bold;
@@ -25,7 +26,7 @@
     object-fit: contain;
     position: absolute;
     top: 0;
-    left: -110px;
+    left: -80%;
 }
 .banner_iconText {
     font-size: 62px;

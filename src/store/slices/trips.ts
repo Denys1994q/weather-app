@@ -17,6 +17,19 @@ export const getTodaysWeather = createAsyncThunk(
     }
 );
 
+export const getWeekWeather = createAsyncThunk(
+    "trips/getWeekWeather",
+    async ({city, startDate, endDate}: any) => {
+        const response = await fetch(`${url}/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData[0].msg || 'Failed to get data');
+        }
+        const data = await response.json();
+        return data;
+    }
+);
+
 const initialState: any = {
     trips: [cities[0]],
     selectedTripId: cities[0].id
@@ -54,7 +67,6 @@ const TripsSlice = createSlice({
             const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
                 const trip = state.trips[tripIndex];
-                // const todayWeather = action.payload.days[0].temp;
                 const todayWeather = {
                     temp: action.payload.days[0].temp,
                     icon: action.payload.days[0].icon,

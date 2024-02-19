@@ -11,7 +11,8 @@ import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
 import { addTrip, selectTrip } from "../store/slices/trips";
 import { City } from "../data/citiesData";
-import { getTodaysWeather } from "../store/slices/trips";
+import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
+import transformDate from '../utils/dateUtils';
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
@@ -20,13 +21,24 @@ const HomePage = () => {
     const trips = useAppSelector(store => store.trips.trips);
     const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
     const selectedTrip = trips.find((t: any) => t.id === selectedTripId);
-    const githubUrlImgs = 'https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color'
+    const githubUrlImgs =
+        "https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color";
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const today = new Date();
+    const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
         console.log("here");
         dispatch(getTodaysWeather({ city: selectedTrip.city }));
+        dispatch(
+            getWeekWeather({
+                city: selectedTrip.city,
+                startDate: transformDate(selectedTrip.startDate),
+                endDate: transformDate(selectedTrip.endDate),
+            })
+        );
     }, [selectedTripId, dispatch]);
-
+    
     const handleCloseModal = () => {
         setIsOpen(false);
     };
@@ -68,10 +80,12 @@ const HomePage = () => {
                 </div>
                 {selectedTrip && selectedTrip.todayWeather && (
                     <div className='home__todayWeather'>
-                        <Banner 
+                        <Banner
                             city={selectedTrip.city}
-                            temp={selectedTrip.todayWeather.temp}  
-                            icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`} />
+                            day={dayOfWeek}
+                            temp={Math.floor(selectedTrip.todayWeather.temp)}
+                            icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`}
+                        />
                     </div>
                 )}
             </section>
