@@ -33,6 +33,7 @@ export const getWeekWeather = createAsyncThunk(
 const initialState: any = {
     trips: [cities[0]],
     selectedTripId: cities[0].id,
+    cityFilter: '',
     // 
     getTodaysWeatherLoading: false,
     getTodaysWeatherError: false,
@@ -61,7 +62,13 @@ const TripsSlice = createSlice({
                 ...state,
                 selectedTripId: action.payload
             }
-        }
+        },
+        setActiveFilter: (state: any, action: any) => {
+            return {
+                ...state,
+                cityFilter: action.payload
+            }
+        },
     },
     extraReducers: builder => {
         builder 
@@ -114,4 +121,4 @@ const { actions, reducer } = TripsSlice;
 
 export default reducer;
 
-export const { addTrip, selectTrip } = actions;
+export const { addTrip, selectTrip, setActiveFilter } = actions;

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { cities } from "../data/citiesData";
 import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
-import { addTrip, selectTrip } from "../store/slices/trips";
+import { addTrip, selectTrip, setActiveFilter } from "../store/slices/trips";
 import { City } from "../data/citiesData";
 import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
 import transformDate from "../utils/dateUtils";
@@ -21,6 +21,7 @@ const HomePage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const trips = useAppSelector(store => store.trips.trips);
     const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
+    const cityFilter = useAppSelector(store => store.trips.cityFilter);
     const selectedTrip = trips.find((t: any) => t.id === selectedTripId);
     const todayWeatherLoading = useAppSelector(store => store.trips.getTodaysWeatherLoading);
     const todayWeatherErr = useAppSelector(store => store.trips.getTodaysWeatherError);
@@ -61,6 +62,10 @@ const HomePage = () => {
         dispatch(selectTrip(id));
     };
 
+    const handleSearchChange = (newValue: any) => {
+        dispatch(setActiveFilter(newValue))
+    };
+
     return (
         <>
             <section className='home'>
@@ -69,11 +74,14 @@ const HomePage = () => {
                         Weather <span>Forecast</span>
                     </h1>
                     <div className='home__searchPanel'>
-                        <SearchPanel />
+                        <SearchPanel onSearchChange={handleSearchChange} />
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
-                            <CityCards cities={trips} activeCityId={selectedTripId} onCityClick={handleCityClick} />
+                            <CityCards 
+                                cities={trips.filter((t: any) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))} 
+                                activeCityId={selectedTripId} 
+                                onCityClick={handleCityClick} />
                         </div>
                         <div className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
