@@ -12,15 +12,19 @@ import { useAppSelector } from "../store/hooks";
 import { addTrip, selectTrip } from "../store/slices/trips";
 import { City } from "../data/citiesData";
 import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
-import transformDate from '../utils/dateUtils';
+import transformDate from "../utils/dateUtils";
+import Spinner from "../components/spinner/Spinner";
+import Error from "../components/error/Error";
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
     const [isOpen, setIsOpen] = useState(false);
-
     const trips = useAppSelector(store => store.trips.trips);
     const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
     const selectedTrip = trips.find((t: any) => t.id === selectedTripId);
+    const todayWeatherLoading = useAppSelector(store => store.trips.getTodaysWeatherLoading);
+    const todayWeatherErr = useAppSelector(store => store.trips.getTodaysWeatherError);
+
     const githubUrlImgs =
         "https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color";
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -28,17 +32,18 @@ const HomePage = () => {
     const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
-        console.log("here");
+        console.log("here");       
         dispatch(getTodaysWeather({ city: selectedTrip.city }));
-        dispatch(
-            getWeekWeather({
-                city: selectedTrip.city,
-                startDate: transformDate(selectedTrip.startDate),
-                endDate: transformDate(selectedTrip.endDate),
-            })
-        );
-    }, [selectedTripId, dispatch]);
-    
+        // dispatch(
+        //     getWeekWeather({
+        //         city: selectedTrip.city,
+        //         startDate: transformDate(selectedTrip.startDate),
+        //         endDate: transformDate(selectedTrip.endDate),
+        //     })
+        // );
+        
+    }, [selectedTripId]);
+
     const handleCloseModal = () => {
         setIsOpen(false);
     };
@@ -78,16 +83,18 @@ const HomePage = () => {
                         <ForecastCards />
                     </div>
                 </div>
-                {selectedTrip && selectedTrip.todayWeather && (
-                    <div className='home__todayWeather'>
+                <div className='home__todayWeather'>
+                    {todayWeatherLoading && <Spinner />}
+                    {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
+                    {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
                         <Banner
                             city={selectedTrip.city}
                             day={dayOfWeek}
                             temp={Math.floor(selectedTrip.todayWeather.temp)}
                             icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`}
                         />
-                    </div>
-                )}
+                    ) : null}
+                </div>
             </section>
             <CreateTripModal
                 cities={cities}

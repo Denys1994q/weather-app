@@ -32,7 +32,10 @@ export const getWeekWeather = createAsyncThunk(
 
 const initialState: any = {
     trips: [cities[0]],
-    selectedTripId: cities[0].id
+    selectedTripId: cities[0].id,
+    // 
+    getTodaysWeatherLoading: false,
+    getTodaysWeatherError: false,
 };
 
 const TripsSlice = createSlice({ 
@@ -63,7 +66,33 @@ const TripsSlice = createSlice({
     extraReducers: builder => {
         builder 
         // get todays weather
+        .addCase(getTodaysWeather.pending, state => {
+            state.getTodaysWeatherLoading = true;
+            state.getTodaysWeatherError = false;
+        })
         .addCase(getTodaysWeather.fulfilled, (state, action) => {
+            const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
+            if (tripIndex !== -1) {
+                const trip = state.trips[tripIndex];
+                const todayWeather = {
+                    temp: action.payload.days[0].temp,
+                    icon: action.payload.days[0].icon,
+                }
+                const updatedTrip = {
+                    ...trip,
+                    todayWeather: todayWeather
+                };
+                state.trips[tripIndex] = updatedTrip;
+                state.getTodaysWeatherLoading = false;
+                state.getTodaysWeatherError = false;
+            }
+        })
+        .addCase(getTodaysWeather.rejected, state => {
+            state.getTodaysWeatherLoading = false;
+            state.getTodaysWeatherError = true;
+        })
+        // get week weather
+        .addCase(getWeekWeather.fulfilled, (state, action) => {
             const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
                 const trip = state.trips[tripIndex];
