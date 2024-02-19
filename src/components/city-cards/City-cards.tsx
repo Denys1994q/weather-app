@@ -10,7 +10,7 @@ interface CityCardsProps {
 
 const CityCards: React.FC<CityCardsProps> = ({cities, activeCityId, onCityClick}) => {
     const handleCityClick = (cityId: string) => {
-        onCityClick(cityId); // Передаємо активний ID міста вище
+        onCityClick(cityId); 
     };
     return (
         <ul className="cards">

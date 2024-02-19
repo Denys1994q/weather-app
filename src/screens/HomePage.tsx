@@ -5,26 +5,27 @@ import AddBtn from "../components/btns/add-btn/Add-btn";
 import ForecastCards from "../components/forecast-cards/Forecast-cards";
 import Banner from "../components/banner/Banner";
 import CreateTripModal from "../components/modal/CreateTrip-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cities } from "../data/citiesData";
 import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
-import { addTrip } from "../store/slices/trips";
+import { addTrip, selectTrip } from "../store/slices/trips";
 import { City } from "../data/citiesData";
+import { getTodaysWeather } from "../store/slices/trips";
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
     const [isOpen, setIsOpen] = useState(false);
 
     const trips = useAppSelector(store => store.trips.trips);
-    const [tripId, setTripId] = useState('')
+    const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
+    const selectedTrip = trips.find((t: any) => t.id === selectedTripId);
+    const githubUrlImgs = 'https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color'
 
-    // const selectedTrip = trips.find()
-
-    // по кліку треба відправити запит і результати запиту записати в масив trips в потрібний об'єкт
-    // а далі просто передавати з selectedTrip.todayWeather в Banner. selectedTripWeekWeather в Cards
-
-    // useEffect() [tripId]
+    useEffect(() => {
+        console.log("here");
+        dispatch(getTodaysWeather({ city: selectedTrip.city }));
+    }, [selectedTripId, dispatch]);
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -39,10 +40,9 @@ const HomePage = () => {
         setIsOpen(false);
     };
 
-    const handleCityClick = (id: string) => {
-        setTripId(id)
-        console.log(id)
-    }
+    const handleCityClick = (id: any) => {
+        dispatch(selectTrip(id));
+    };
 
     return (
         <>
@@ -56,10 +56,7 @@ const HomePage = () => {
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
-                            <CityCards 
-                                cities={trips} 
-                                activeCityId={tripId}
-                                onCityClick={handleCityClick} />
+                            <CityCards cities={trips} activeCityId={selectedTripId} onCityClick={handleCityClick} />
                         </div>
                         <div className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
@@ -69,9 +66,14 @@ const HomePage = () => {
                         <ForecastCards />
                     </div>
                 </div>
-                <div className='home__todayWeather'>
-                    <Banner />
-                </div>
+                {selectedTrip && selectedTrip.todayWeather && (
+                    <div className='home__todayWeather'>
+                        <Banner 
+                            city={selectedTrip.city}
+                            temp={selectedTrip.todayWeather.temp}  
+                            icon={`${githubUrlImgs}/${selectedTrip.todayWeather.icon}.png`} />
+                    </div>
+                )}
             </section>
             <CreateTripModal
                 cities={cities}
