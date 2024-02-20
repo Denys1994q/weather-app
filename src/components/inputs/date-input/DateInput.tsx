@@ -6,13 +6,16 @@ import Label from "../label/Label";
 interface DateInputProps {
     label: string;
     placeholder: string;
-    name: string; // Змінено з fieldName на name
+    name: string; 
+    minDate: string; 
+    maxDate: string; 
 }
 
-const DateInput: React.FC<DateInputProps> = ({ label, name, placeholder }) => { // Змінено з fieldName на name
-    const [field, , helpers] = useField(name); // Змінено з fieldName на name
+const DateInput: React.FC<DateInputProps> = ({ label, name, placeholder, minDate, maxDate }) => { 
+    const [field, , helpers] = useField(name); 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('eventtt')
         helpers.setValue(event.target.value);
     };
 
@@ -20,7 +23,14 @@ const DateInput: React.FC<DateInputProps> = ({ label, name, placeholder }) => { 
         <div className='date-input-container'>
             {label && <Label labeltext={label} />} 
             <div className='date-input-wrapper'>
-                <input className='custom-date-input' type='date' placeholder={placeholder} onChange={handleChange} value={field.value || ""} />
+                <input 
+                    min={minDate} 
+                    max={maxDate}
+                    className='custom-date-input' 
+                    type='date' 
+                    placeholder={placeholder} 
+                    onChange={handleChange}  
+                    value={field.value || ""} />
             </div>
         </div>
     );

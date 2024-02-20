@@ -11,6 +11,8 @@
     width: 400px;
 }
 .home__forecast {
+    width: 650px;
+    overflow: auto;
     margin-top: 40px;
 }
 /* cardsPanel */
