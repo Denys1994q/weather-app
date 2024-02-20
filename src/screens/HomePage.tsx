@@ -12,7 +12,6 @@ import { useAppSelector } from "../store/hooks";
 import { addTrip, selectTrip, setActiveFilter } from "../store/slices/trips";
 import { City } from "../data/citiesData";
 import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
-import transformDate from "../utils/dateUtils";
 import Spinner from "../components/spinner/Spinner";
 import Error from "../components/error/Error";
 import Timer from "../components/timer/Timer";
@@ -34,18 +33,14 @@ const HomePage = () => {
     const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
-        console.log("here");       
         dispatch(getTodaysWeather({ city: selectedTrip.city }));
-        console.log(selectedTrip.startDate)
-        // тут навпаки нічого не треба трансформуваи, апі так і хоче приймати як є, тільки у відображенні треба трансформувати
-        // dispatch(
-        //     getWeekWeather({
-        //         city: selectedTrip.city,
-        //         startDate: transformDate(selectedTrip.startDate),
-        //         endDate: transformDate(selectedTrip.endDate),
-        //     })
-        // );
-        
+        dispatch(
+            getWeekWeather({
+                city: selectedTrip.city,
+                startDate: selectedTrip.startDate,
+                endDate: selectedTrip.endDate,
+            })
+        );
     }, [selectedTripId]);
 
     const handleCloseModal = () => {
@@ -66,8 +61,9 @@ const HomePage = () => {
     };
 
     const handleSearchChange = (newValue: any) => {
-        dispatch(setActiveFilter(newValue))
+        dispatch(setActiveFilter(newValue));
     };
+
 
     return (
         <>
@@ -81,17 +77,22 @@ const HomePage = () => {
                     </div>
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
-                            <CityCards 
-                                cities={trips.filter((t: any) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))} 
-                                activeCityId={selectedTripId} 
-                                onCityClick={handleCityClick} />
+                            <CityCards
+                                cities={trips.filter((t: any) =>
+                                    t.city.toLowerCase().includes(cityFilter.toLowerCase())
+                                )}
+                                activeCityId={selectedTripId}
+                                onCityClick={handleCityClick}
+                            />
                         </div>
                         <div className='cardsPanel__btn'>
                             <AddBtn onAddBtnClick={handleAddBtnClick} />
                         </div>
                     </div>
                     <div className='home__forecast'>
-                        <ForecastCards />
+                        {selectedTrip && selectedTrip.weekWeather ? (
+                            <ForecastCards cards={selectedTrip.weekWeather} githubUrlImgs={githubUrlImgs} />
+                        ) : null}
                     </div>
                 </div>
                 <div className='home__todayWeather'>

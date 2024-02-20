@@ -8,7 +8,6 @@ const Timer = ({ deadline }: any) => {
     const [seconds, setSeconds] = useState(0);
     const [isDeadlineReached, setIsDeadlineReached] = useState(false);
 
-    // timer
     const time = (deadline: any) => {
         const t = Date.parse(deadline) - Date.parse(new Date() as any);
         const days = Math.floor(t / (1000 * 60 * 60 * 24));
@@ -18,7 +17,6 @@ const Timer = ({ deadline }: any) => {
 
         if (t <= 0) {
             setIsDeadlineReached(true);
-            // clearInterval(timer); // Зупиняємо таймер
         } else {
             setDays(days);
             setHours(hours);
@@ -29,7 +27,6 @@ const Timer = ({ deadline }: any) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            console.log("here");
             time(deadline);
         }, 1000);
         isDeadlineReached && clearInterval(timer);
@@ -59,57 +56,3 @@ const Timer = ({ deadline }: any) => {
 };
 
 export default Timer;
-
-// import "./Timer.css";
-// import React, { useState, useEffect } from "react";
-
-// interface TimerProps {
-//     deadline: string;
-// }
-
-// const Timer: React.FC<TimerProps> = ({ deadline }) => {
-//     const calculateTimeLeft = () => {
-//         const difference = +new Date(deadline) - +new Date();
-//         let timeLeft: { [key: string]: number } = {};
-
-//         if (difference > 0) {
-//             timeLeft = {
-//                 days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-//                 hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-//                 minutes: Math.floor((difference / 1000 / 60) % 60),
-//                 seconds: Math.floor((difference / 1000) % 60),
-//             };
-//         }
-
-//         return timeLeft;
-//     };
-
-//     const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>(calculateTimeLeft());
-
-//     useEffect(() => {
-//         const timer = setTimeout(() => {
-//             setTimeLeft(calculateTimeLeft());
-//         }, 1000);
-
-//         return () => clearTimeout(timer);
-//     });
-
-//     const timerComponents: JSX.Element[] = [];
-
-//     Object.keys(timeLeft).forEach(interval => {
-//         if (!timeLeft[interval as keyof typeof timeLeft]) {
-//             return;
-//         }
-
-//         timerComponents.push(
-//             <div className='timerContainer' key={interval}>
-//                 <span className='timerNumber'>{timeLeft[interval as keyof typeof timeLeft]}</span>
-//                 <span className='timerLabel'>{interval}</span>
-//             </div>
-//         );
-//     });
-
-//     return <div className='timerBlock'>{timerComponents.length ? timerComponents : <span>Time's up!</span>}</div>;
-// };
-
-// export default Timer;

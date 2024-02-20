@@ -103,13 +103,18 @@ const TripsSlice = createSlice({
             const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
                 const trip = state.trips[tripIndex];
-                const todayWeather = {
-                    temp: action.payload.days[0].temp,
-                    icon: action.payload.days[0].icon,
-                }
+                const data = action.payload.days
+                const formattedData = data.map((day: any) => {
+                    return {
+                        datetime: day.datetime,
+                        tempmin: day.tempmin,
+                        tempmax: day.tempmax,
+                        icon: day.icon
+                    }
+                })
                 const updatedTrip = {
                     ...trip,
-                    todayWeather: todayWeather
+                    weekWeather: formattedData
                 };
                 state.trips[tripIndex] = updatedTrip;
             }

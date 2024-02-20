@@ -1,7 +1,7 @@
 import './City-cards.css'
 import CityCard from '../city-card/City-card'
 import { City } from '../../data/citiesData'
-import transformDate from '../../utils/dateUtils'
+import { transformDate } from '../../utils/dateUtils'
 
 interface CityCardsProps {
     cities: City[];
