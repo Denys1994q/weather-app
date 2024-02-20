@@ -71,11 +71,19 @@ const HomePage = () => {
         dispatch(setActiveFilter(newValue));
     };
 
+    const filteredTrips = trips.filter((t: any) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))
+
+    const filteredSortTrips = filteredTrips.sort((a: any, b: any) => {
+        const dateA: any = new Date(a.startDate);
+        const dateB: any = new Date(b.startDate);
+        return dateA - dateB;
+    });
+
     return (
         <>
             <section className='home'>
                 <div className='home__trips'>
-                    <header className="authPanel">
+                    <header className='authPanel'>
                         <h1 className='home__title'>
                             Weather <span>Forecast</span>
                         </h1>
@@ -87,9 +95,7 @@ const HomePage = () => {
                     <div className='home__cardsPanel cardsPanel'>
                         <div className='cardsPanel__cards'>
                             <CityCards
-                                cities={trips.filter((t: any) =>
-                                    t.city.toLowerCase().includes(cityFilter.toLowerCase())
-                                )}
+                                cities={filteredSortTrips}
                                 activeCityId={selectedTripId}
                                 onCityClick={handleCityClick}
                             />
