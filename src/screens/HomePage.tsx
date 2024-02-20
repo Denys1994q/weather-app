@@ -35,7 +35,7 @@ const HomePage = () => {
     const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
-        // dispatch(getTodaysWeather({ city: selectedTrip.city }));
+        dispatch(getTodaysWeather({ city: selectedTrip.city }));
         // dispatch(
         //     getWeekWeather({
         //         city: selectedTrip.city,
@@ -44,6 +44,10 @@ const HomePage = () => {
         //     })
         // );
     }, [selectedTripId]);
+
+    useEffect(() => {
+        localStorage.setItem('trips', JSON.stringify(trips));
+    }, [trips])
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -99,7 +103,7 @@ const HomePage = () => {
                         ) : null}
                     </div>
                 </div>
-                {/* <div className='home__todayWeather'>
+                <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
                     {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
                     {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
@@ -111,7 +115,7 @@ const HomePage = () => {
                             deadline={`${selectedTrip.startDate} 00:00`}
                         />
                     ) : null}
-                </div> */}
+                </div>
             </section>
             <CreateTripModal
                 cities={cities}

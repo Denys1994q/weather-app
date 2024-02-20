@@ -30,9 +30,12 @@ export const getWeekWeather = createAsyncThunk(
     }
 );
 
+const savedTrips = localStorage.getItem('trips');
+const trips = savedTrips ? JSON.parse(savedTrips) : [cities[0]];
+
 const initialState: any = {
-    trips: [cities[0]],
-    selectedTripId: cities[0].id,
+    trips: trips,
+    selectedTripId: trips[0].id,
     cityFilter: '',
     // 
     getTodaysWeatherLoading: false,
