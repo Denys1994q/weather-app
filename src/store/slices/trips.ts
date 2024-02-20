@@ -37,6 +37,9 @@ const initialState: any = {
     // 
     getTodaysWeatherLoading: false,
     getTodaysWeatherError: false,
+    // 
+    getWeekWeatherLoading: false,
+    getWeekWeatherError: false,
 };
 
 const TripsSlice = createSlice({ 
@@ -99,6 +102,10 @@ const TripsSlice = createSlice({
             state.getTodaysWeatherError = true;
         })
         // get week weather
+        .addCase(getWeekWeather.pending, state => {
+            state.getWeekWeatherLoading = true;
+            state.getWeekWeatherError = false;
+        })
         .addCase(getWeekWeather.fulfilled, (state, action) => {
             const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
@@ -117,7 +124,13 @@ const TripsSlice = createSlice({
                     weekWeather: formattedData
                 };
                 state.trips[tripIndex] = updatedTrip;
+                state.getWeekWeatherLoading = false;
+                state.getWeekWeatherError = false;
             }
+        })
+        .addCase(getWeekWeather.rejected, state => {
+            state.getTodaysWeatherLoading = false;
+            state.getTodaysWeatherError = true;
         })
     }
 })

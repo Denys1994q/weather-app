@@ -25,6 +25,8 @@ const HomePage = () => {
     const selectedTrip = trips.find((t: any) => t.id === selectedTripId);
     const todayWeatherLoading = useAppSelector(store => store.trips.getTodaysWeatherLoading);
     const todayWeatherErr = useAppSelector(store => store.trips.getTodaysWeatherError);
+    const weekWeatherLoading = useAppSelector(store => store.trips.getWeekWeatherLoading);
+    const weekWeatherErr = useAppSelector(store => store.trips.getWeekWeatherError);
 
     const githubUrlImgs =
         "https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color";
@@ -90,6 +92,8 @@ const HomePage = () => {
                         </div>
                     </div>
                     <div className='home__forecast'>
+                        {weekWeatherLoading && <Spinner />}
+                        {weekWeatherErr && <Error message="Sorry, smth is wrong..." /> }
                         {selectedTrip && selectedTrip.weekWeather ? (
                             <ForecastCards cards={selectedTrip.weekWeather} githubUrlImgs={githubUrlImgs} />
                         ) : null}
