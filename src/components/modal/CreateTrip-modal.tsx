@@ -8,9 +8,8 @@ import Button from "../btns/btn/Button";
 import { City } from "../../data/citiesData";
 
 const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
-
     const handleClose = () => {
-        onClose(); 
+        onClose();
     };
 
     const cityOptions = cities.map((city: City) => ({
@@ -26,15 +25,17 @@ const CreateTripModal = ({ isOpen, onClose, cities, onSaveBtnClick }: any) => {
     };
 
     const today = new Date();
-    const next15Days = new Date();
-    next15Days.setDate(today.getDate() + 15);
-    const minDate = formatDate(today);
+    const nextDay = new Date(today);
+    nextDay.setDate(today.getDate() + 1); 
+    const minDate = formatDate(nextDay);
+    const next15Days = new Date(nextDay);
+    next15Days.setDate(nextDay.getDate() + 15);
     const maxDate = formatDate(next15Days);
 
     return (
         isOpen && (
             <div className='modal' onClick={handleClose}>
-                <div className='modal__inner' onClick={(e) => e.stopPropagation()}>
+                <div className='modal__inner' onClick={e => e.stopPropagation()}>
                     <header className='modal__header'>
                         <h2 className='modal__title'>Create Trip</h2>
                         <span className='close' onClick={handleClose}>
