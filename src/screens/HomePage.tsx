@@ -15,6 +15,7 @@ import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
 import Spinner from "../components/spinner/Spinner";
 import Error from "../components/error/Error";
 import Timer from "../components/timer/Timer";
+import AuthPanel from "../components/auth-panel/AuthPanel";
 
 const HomePage = () => {
     const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ const HomePage = () => {
     const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
-        dispatch(getTodaysWeather({ city: selectedTrip.city }));
+        // dispatch(getTodaysWeather({ city: selectedTrip.city }));
         // dispatch(
         //     getWeekWeather({
         //         city: selectedTrip.city,
@@ -46,8 +47,8 @@ const HomePage = () => {
     }, [selectedTripId]);
 
     useEffect(() => {
-        localStorage.setItem('trips', JSON.stringify(trips));
-    }, [trips])
+        localStorage.setItem("trips", JSON.stringify(trips));
+    }, [trips]);
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -70,14 +71,16 @@ const HomePage = () => {
         dispatch(setActiveFilter(newValue));
     };
 
-
     return (
         <>
             <section className='home'>
                 <div className='home__trips'>
-                    <h1 className='home__title'>
-                        Weather <span>Forecast</span>
-                    </h1>
+                    <header className="authPanel">
+                        <h1 className='home__title'>
+                            Weather <span>Forecast</span>
+                        </h1>
+                        <AuthPanel />
+                    </header>
                     <div className='home__searchPanel'>
                         <SearchPanel onSearchChange={handleSearchChange} />
                     </div>
@@ -97,13 +100,13 @@ const HomePage = () => {
                     </div>
                     <div className='home__forecast'>
                         {weekWeatherLoading && <Spinner />}
-                        {weekWeatherErr && <Error message="Sorry, smth is wrong..." /> }
-                        {selectedTrip && selectedTrip.weekWeather && !weekWeatherLoading  ? (
+                        {weekWeatherErr && <Error message='Sorry, smth is wrong...' />}
+                        {selectedTrip && selectedTrip.weekWeather && !weekWeatherLoading ? (
                             <ForecastCards cards={selectedTrip.weekWeather} githubUrlImgs={githubUrlImgs} />
                         ) : null}
                     </div>
                 </div>
-                <div className='home__todayWeather'>
+                {/* <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
                     {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
                     {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
@@ -115,7 +118,7 @@ const HomePage = () => {
                             deadline={`${selectedTrip.startDate} 00:00`}
                         />
                     ) : null}
-                </div>
+                </div> */}
             </section>
             <CreateTripModal
                 cities={cities}
