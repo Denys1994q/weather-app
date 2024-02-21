@@ -87,24 +87,18 @@ input[type="date"]:in-range::-webkit-datetime-edit-month-field,
 input[type="date"]:in-range::-webkit-datetime-edit-day-field {
     color: transparent;
 } */
-/* Ширина скролл-панелі */
+
 ::-webkit-scrollbar {
-    width: 30px;
+    width: 10px;
     height: 7px;
-  }
-  
-  /* Колір фону скролл-панелі */
-  ::-webkit-scrollbar-track {
+}
+::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  /* Колір скролл-панелі */
-  ::-webkit-scrollbar-thumb {
+}  
+::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  /* Заокруглення країв скролл-панелі */
-  ::-webkit-scrollbar-thumb {
+}  
+::-webkit-scrollbar-thumb {
     border-radius: 5px;
-  }
+}
   

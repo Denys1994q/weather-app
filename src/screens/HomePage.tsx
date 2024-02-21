@@ -36,14 +36,14 @@ const HomePage = () => {
     const dayOfWeek = daysOfWeek[today.getDay()];
 
     useEffect(() => {
-        // dispatch(getTodaysWeather({ city: selectedTrip.city }));
-        // dispatch(
-        //     getWeekWeather({
-        //         city: selectedTrip.city,
-        //         startDate: selectedTrip.startDate,
-        //         endDate: selectedTrip.endDate,
-        //     })
-        // );
+        dispatch(getTodaysWeather({ city: selectedTrip.city }));
+        dispatch(
+            getWeekWeather({
+                city: selectedTrip.city,
+                startDate: selectedTrip.startDate,
+                endDate: selectedTrip.endDate,
+            })
+        );
     }, [selectedTripId]);
 
     useEffect(() => {
@@ -112,7 +112,7 @@ const HomePage = () => {
                         ) : null}
                     </div>
                 </div>
-                {/* <div className='home__todayWeather'>
+                <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
                     {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
                     {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
@@ -124,7 +124,7 @@ const HomePage = () => {
                             deadline={`${selectedTrip.startDate} 00:00`}
                         />
                     ) : null}
-                </div> */}
+                </div>
             </section>
             <CreateTripModal
                 cities={cities}

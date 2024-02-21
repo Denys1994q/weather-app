@@ -1,6 +1,7 @@
 .timerBlock {
-    width: 320px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 40px;
 }
@@ -20,4 +21,9 @@
     text-transform: uppercase;
 }
 
-  
+@media screen and (max-width: 500px) {
+    .timerBlock {
+        margin-top: 10px;
+        gap: 20px;
+    }
+}

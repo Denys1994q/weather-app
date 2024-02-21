@@ -47,3 +47,14 @@
 .banner__timer {
     margin-top: 60px;
 }
+
+@media screen and (max-width: 1200px) {
+    .banner__icon {
+        display: none;
+    }
+}
+@media screen and (max-width: 400px) {
+    .banner__timer {
+        margin-top: 10px;
+    }
+}
