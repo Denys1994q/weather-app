@@ -1,5 +1,48 @@
-.cards {
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+.carousel {
     display: flex;
-    align-items: center;
     gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 3px;
+}
+.carousel-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+.carousel__btns {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.carousel__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1; 
+}
+.prev {
+    left: 0;
+    background-image: url('https://res.cloudinary.com/dw60kllwn/image/upload/v1708503647/caret-left_ffpbbv.svg');
+    background-size: cover; 
+    width: 40px; 
+    height: 40px; 
+}
+.next {
+    right: 0px;
+    background-image: url('https://res.cloudinary.com/dw60kllwn/image/upload/v1708503687/caret-right_qntduz.svg');
+    background-size: cover; 
+    width: 40px; 
+    height: 40px;
 }
