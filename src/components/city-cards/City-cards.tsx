@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import "./City-cards.css";
 import CityCard from "../city-card/City-card";
-import { City } from "../../data/citiesData";
 import { transformDate } from "../../utils/dateUtils";
+import { Trip } from "../../store/slices/models/trip";
 
 interface CityCardsProps {
-    cities: City[];
+    cities: Trip[];
     onCityClick: (cityId: string) => void;
     activeCityId: string;
 }

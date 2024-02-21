@@ -11,13 +11,11 @@
     display: flex;
     align-items: center;
 }
-
 .google-logout-btn img {
     width: 24px;
     height: 24px;
     margin-right: 8px;
 }
-
 .google-logout-btn:hover {
     background-color: #f35454;
     color: #ffffff;

@@ -1,7 +1,6 @@
 .searchPanel {
     position: relative;
 }
-
 .searchPanel input {
     min-width: 235px;
     background: url('../../imgs/search-icon.webp') no-repeat;
@@ -13,7 +12,6 @@
     border-radius: 5px;
     outline: none;
 }
-
 .searchPanel img {
     position: absolute; 
     left: 10px; 

@@ -1,6 +1,10 @@
 import "./Add-btn.css";
 
-const AddBtn = ({ onAddBtnClick }: any) => {
+interface AddBtnProps {
+    onAddBtnClick: () => void; 
+}
+
+const AddBtn: React.FC<AddBtnProps> = ({ onAddBtnClick }) => {
     return (
         <button className='add-btn' onClick={onAddBtnClick}>
             <span>+</span>

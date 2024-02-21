@@ -1,7 +1,6 @@
 .forecast-card {
     width: 90px;
     height: 120px;
-    /* background: red; */
     padding: 5px;
 }
 .forecast-card__title {

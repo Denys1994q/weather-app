@@ -1,6 +1,13 @@
 import './Forecast-card.css'
 
-const ForecastCard = ({tempmin, tempmax, icon, datetime}: any) => {
+interface ForecastCardProps {
+    tempmin: number;
+    tempmax: number;
+    icon: string;
+    datetime: string;
+}
+
+const ForecastCard: React.FC<ForecastCardProps> = ({tempmin, tempmax, icon, datetime}) => {
     return (
         <article className='forecast-card'>
             <h2 className='forecast-card__title'>{datetime}</h2>

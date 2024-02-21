@@ -11,7 +11,7 @@ interface Response {
     select_by?: string;
 }
 
-const AuthPanel = () => {
+const AuthPanel: React.FC = () => {
     const dispatch = useAppDispatch();
     const userData = useAppSelector(store => store.auth.user);
     const [user, setUser] = useState(null);

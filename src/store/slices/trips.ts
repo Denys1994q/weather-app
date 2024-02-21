@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction   } from "@reduxjs/toolkit";
 import { cities } from "../../data/citiesData";
+import { Trip } from "./models/trip";
 
 const url = process.env.REACT_APP_TIMELINE_API_URL;
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY
@@ -33,14 +34,22 @@ export const getWeekWeather = createAsyncThunk(
 const savedTrips = localStorage.getItem('trips');
 const trips = savedTrips ? JSON.parse(savedTrips) : [cities[0]];
 
-const initialState: any = {
+interface TripsState {
+    trips: Trip[],
+    selectedTripId: string,
+    cityFilter: string,
+    getTodaysWeatherLoading: boolean,
+    getTodaysWeatherError: boolean,
+    getWeekWeatherLoading: boolean,
+    getWeekWeatherError: boolean
+}
+
+const initialState: TripsState = {
     trips: trips,
     selectedTripId: trips[0].id,
     cityFilter: '',
-    // 
     getTodaysWeatherLoading: false,
     getTodaysWeatherError: false,
-    // 
     getWeekWeatherLoading: false,
     getWeekWeatherError: false,
 };
@@ -49,31 +58,20 @@ const TripsSlice = createSlice({
     name: "trips",
     initialState,
     reducers: {
-        addTrip: (state: any, action: any) => {
+        addTrip: (state, action: PayloadAction<{ city: string; startDate: string; endDate: string }>) => {
             const { city, startDate, endDate } = action.payload
             const selectedCity = cities.find(c => c.id === city)
             if (selectedCity) {
                 selectedCity.startDate = startDate
                 selectedCity.endDate = endDate
-                return {
-                    ...state,
-                    trips: [...state.trips, selectedCity]
-                }
-            } else {
-                return {...state}
+                state.trips.push(selectedCity)
             }
         }, 
-        selectTrip: (state: any, action: any) => {
-            return {
-                ...state,
-                selectedTripId: action.payload
-            }
+        selectTrip: (state, action: PayloadAction<string>) => {
+            state.selectedTripId = action.payload
         },
-        setActiveFilter: (state: any, action: any) => {
-            return {
-                ...state,
-                cityFilter: action.payload
-            }
+        setActiveFilter: (state, action: PayloadAction<string>) => {
+            state.cityFilter = action.payload
         },
     },
     extraReducers: builder => {
@@ -84,7 +82,7 @@ const TripsSlice = createSlice({
             state.getTodaysWeatherError = false;
         })
         .addCase(getTodaysWeather.fulfilled, (state, action) => {
-            const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
+            const tripIndex = state.trips.findIndex((t: Trip) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
                 const trip = state.trips[tripIndex];
                 const todayWeather = {

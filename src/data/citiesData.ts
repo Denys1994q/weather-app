@@ -1,12 +1,5 @@
 import { v4 as uuidv4 } from "uuid"; 
-
-export interface City {
-    id: string,
-    city: string,
-    img: string,
-    startDate: string,
-    endDate: string
-}
+import { Trip } from "../store/slices/models/trip";
 
 const today = new Date();
 today.setDate(today.getDate() + 1);
@@ -16,7 +9,7 @@ endDate.setDate(endDate.getDate() + 5);
 const formattedStartDate = today.toISOString().slice(0, 10);
 const formattedEndDate = endDate.toISOString().slice(0, 10);
 
-export const cities: City[] = [
+export const cities: Trip[] = [
     {
         id: uuidv4(),
         city: 'Kyiv', 

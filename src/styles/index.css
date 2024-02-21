@@ -5,62 +5,50 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 h1, h2, h3, h4, h5 {
     margin: 0;
     padding: 0;
 }
-
 html {
     font-size: 62.5%;
 }
-
 body {
     color: #000000;
 }
-
 img {
     max-width: 100%;
 }
-
 input[type="number"] {
     -moz-appearance: textfield;
 }
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 a {
     text-decoration: none;
     border: none;
     color: inherit;
     outline: none;
 }
-
 a:hover {
     text-decoration: none;
     color: inherit;
 }
-
 a:visited {
     color: inherit;
     border: none;
 }
-
 a:active {
     color: inherit;
     border: none;
 }
-
 a:focus {
     color: inherit;
     outline: none;
     text-decoration: none;
 }
-
 button, optgroup, select, textarea {
     font-family: inherit;
     font-size: 100%;
@@ -69,24 +57,15 @@ button, optgroup, select, textarea {
     border: none;
     outline: none;
 }
-
 button:active, button:focus {
     outline: none;
 }
-
 p, ul {
     margin: 0;
 }
-
 ul {
     list-style: none;
 }
-
-/* input[type="date"]:in-range::-webkit-datetime-edit-year-field, 
-input[type="date"]:in-range::-webkit-datetime-edit-month-field, 
-input[type="date"]:in-range::-webkit-datetime-edit-day-field {
-    color: transparent;
-} */
 
 ::-webkit-scrollbar {
     width: 10px;

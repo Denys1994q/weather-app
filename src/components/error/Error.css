@@ -4,13 +4,11 @@
     align-items: center;
     justify-content: center;
 }
-  
 .error-image {
     width: 200px;
     height: 200px;
     object-fit: contain;
-}
-  
+} 
 .error-message {
     margin-top: 5px;
     font-size: 18px;
