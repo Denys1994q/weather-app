@@ -59,24 +59,24 @@ const HomePage: React.FC = () => {
         setIsOpen(true);
     };
 
-    const handleSaveBtnClick = (formData: any) => {
-        dispatch(addTrip(formData));
+    const handleSaveBtnClick = (formValues: { city: string; startDate: string; endDate: string; }) => {
+        dispatch(addTrip(formValues));
         setIsOpen(false);
     };
 
-    const handleCityClick = (id: any) => {
+    const handleCityClick = (id: string) => {
         dispatch(selectTrip(id));
     };
 
-    const handleSearchChange = (newValue: any) => {
+    const handleSearchChange = (newValue: string) => {
         dispatch(setActiveFilter(newValue));
     };
 
-    const filteredTrips = trips.filter((t: any) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))
+    const filteredTrips = trips.filter((t: Trip) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))
 
-    const filteredSortTrips = filteredTrips.sort((a: any, b: any) => {
-        const dateA: any = new Date(a.startDate);
-        const dateB: any = new Date(b.startDate);
+    const filteredSortTrips = filteredTrips.sort((a: Trip, b: Trip) => {
+        const dateA = new Date(a.startDate).getTime();
+        const dateB = new Date(b.startDate).getTime();
         return dateA - dateB;
     });
 
@@ -113,7 +113,7 @@ const HomePage: React.FC = () => {
                         ) : null}
                     </div>
                 </div>
-                {/* <div className='home__todayWeather'>
+                <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
                     {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
                     {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
@@ -125,7 +125,7 @@ const HomePage: React.FC = () => {
                             deadline={`${selectedTrip.startDate} 00:00`}
                         />
                     ) : null}
-                </div> */}
+                </div>
             </section>
             <CreateTripModal
                 cities={cities}

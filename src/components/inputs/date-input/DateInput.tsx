@@ -15,7 +15,6 @@ const DateInput: React.FC<DateInputProps> = ({ label, name, placeholder, minDate
     const [field, , helpers] = useField(name); 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('eventtt')
         helpers.setValue(event.target.value);
     };
 

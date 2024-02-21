@@ -7,7 +7,7 @@ const apiKey = process.env.REACT_APP_WEATHER_API_KEY
 
 export const getTodaysWeather = createAsyncThunk(
     "trips/getTodaysWeather",
-    async ({city}: any) => {
+    async ({city}: {city: string}) => {
         const response = await fetch(`${url}/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`);
         if (!response.ok) {
             const errorData = await response.json();
@@ -20,7 +20,7 @@ export const getTodaysWeather = createAsyncThunk(
 
 export const getWeekWeather = createAsyncThunk(
     "trips/getWeekWeather",
-    async ({city, startDate, endDate}: any) => {
+    async ({city, startDate, endDate}: {city: string, startDate: string, endDate: string}) => {
         const response = await fetch(`${url}/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`);
         if (!response.ok) {
             const errorData = await response.json();
@@ -108,7 +108,7 @@ const TripsSlice = createSlice({
             state.getWeekWeatherError = false;
         })
         .addCase(getWeekWeather.fulfilled, (state, action) => {
-            const tripIndex = state.trips.findIndex((t: any) => t.id === state.selectedTripId);
+            const tripIndex = state.trips.findIndex((t: Trip) => t.id === state.selectedTripId);
             if (tripIndex !== -1) {
                 const trip = state.trips[tripIndex];
                 const data = action.payload.days

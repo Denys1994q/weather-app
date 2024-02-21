@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, FormikValues } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import "./CreateTrip-modal.css";
 import Select from "../inputs/select/Select";
@@ -11,7 +11,7 @@ interface CreateTripModalProps {
     isOpen: boolean;
     onClose: () => void;
     cities: Trip[];
-    onSaveBtnClick: (values: FormikValues) => void;
+    onSaveBtnClick: (values:  { city: string; startDate: string; endDate: string; }) => void;
 }
 
 const CreateTripModal: React.FC<CreateTripModalProps> = ({ isOpen, onClose, cities, onSaveBtnClick }) => {

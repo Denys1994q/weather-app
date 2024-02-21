@@ -4,7 +4,7 @@ interface TodayWeather {
     icon: string
 }
 
-interface WeekWeather {
+export interface WeekWeather {
     datetime: string,
     tempmin: number,
     tempmax: number,

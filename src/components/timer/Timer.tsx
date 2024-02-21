@@ -12,7 +12,7 @@ const Timer: React.FC<TimerProps> = ({ deadline }) => {
     const [seconds, setSeconds] = useState(0);
     const [isDeadlineReached, setIsDeadlineReached] = useState(false);
 
-    const time = (deadline: any) => {
+    const time = (deadline: string) => {
         const t = Date.parse(deadline) - Date.parse(new Date() as any);
         const days = Math.floor(t / (1000 * 60 * 60 * 24));
         const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
