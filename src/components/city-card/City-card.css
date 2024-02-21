@@ -10,7 +10,7 @@
 }
 .card__info {
     padding: 20px;
-    border: 2px solid rgb(224, 224, 224);
+    border: 2px solid var(--light-grey);;
     border-top: 2px solid transparent
 }
 .card__title {
@@ -24,4 +24,16 @@
 .card__info.active {
     border: 2px solid rgb(151, 225, 243);
     border-top: 2px solid transparent
+}
+
+@media screen and (max-width: 376px) {
+    .card {
+        width: 100%;
+    }
+    .card__img {
+        height: 200px;
+    }
+    .card {
+        height: 100%;
+    }
 }

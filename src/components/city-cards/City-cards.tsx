@@ -53,7 +53,7 @@ const CityCards: React.FC<CityCardsProps> = ({ cities, activeCityId, onCityClick
                     </ul>
                 </>
             ) : (
-                <h4>Nothing found</h4>
+                <h4 className="carousel__nothingFound">Nothing found</h4>
             )}
         </div>
     );

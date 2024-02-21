@@ -1,0 +1,17 @@
+.success-alert {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.success-alert__icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+.success-alert__message {
+    font-size: 16px;
+}

@@ -46,3 +46,12 @@
     width: 40px; 
     height: 40px;
 }
+.carousel__nothingFound {
+    padding: 20px;
+}
+
+@media screen and (max-width: 376px) {
+    .carousel-card {
+        width: 100%;
+    }
+}

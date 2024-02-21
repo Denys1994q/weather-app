@@ -28,6 +28,7 @@
 }
 .cardsPanel__cards {
     width: 650px;
+    min-height: 310px;
     overflow-x: auto; 
 }
 .home__title {
@@ -36,6 +37,11 @@
 }
 .home__title span {
     font-weight: bold;
+}
+.home__alert {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
 }
 
 @media screen and (max-width: 1200px) {

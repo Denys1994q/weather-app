@@ -5,7 +5,7 @@ import AddBtn from "../components/btns/add-btn/Add-btn";
 import ForecastCards from "../components/forecast-cards/Forecast-cards";
 import Banner from "../components/banner/Banner";
 import CreateTripModal from "../components/modal/CreateTrip-modal";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { cities } from "../data/citiesData";
 import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
@@ -15,10 +15,12 @@ import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
 import Spinner from "../components/spinner/Spinner";
 import Error from "../components/error/Error";
 import AuthPanel from "../components/auth-panel/AuthPanel";
+import SuccessAlert from "../components/success-alert/Success-alert";
 
 const HomePage: React.FC = () => {
     const dispatch = useAppDispatch();
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenAlert, setIsOpenAlert] = useState(false);
     const trips = useAppSelector(store => store.trips.trips);
     const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
     const cityFilter = useAppSelector(store => store.trips.cityFilter);
@@ -56,11 +58,13 @@ const HomePage: React.FC = () => {
     };
 
     const handleAddBtnClick = () => {
+        setIsOpenAlert(false);
         setIsOpen(true);
     };
 
-    const handleSaveBtnClick = (formValues: { city: string; startDate: string; endDate: string; }) => {
+    const handleSaveBtnClick = (formValues: { city: string; startDate: string; endDate: string }) => {
         dispatch(addTrip(formValues));
+        setIsOpenAlert(true);
         setIsOpen(false);
     };
 
@@ -72,13 +76,17 @@ const HomePage: React.FC = () => {
         dispatch(setActiveFilter(newValue));
     };
 
-    const filteredTrips = trips.filter((t: Trip) => t.city.toLowerCase().includes(cityFilter.toLowerCase()))
+    const filteredTrips = useMemo(() => {
+        return trips.filter((t: Trip) => t.city.toLowerCase().includes(cityFilter.toLowerCase()));
+    }, [trips, cityFilter]);
 
-    const filteredSortTrips = filteredTrips.sort((a: Trip, b: Trip) => {
-        const dateA = new Date(a.startDate).getTime();
-        const dateB = new Date(b.startDate).getTime();
-        return dateA - dateB;
-    });
+    const filteredSortTrips = useMemo(() => {
+        return filteredTrips.sort((a: Trip, b: Trip) => {
+            const dateA = new Date(a.startDate).getTime();
+            const dateB = new Date(b.startDate).getTime();
+            return dateA - dateB;
+        });
+    }, [filteredTrips]);
 
     return (
         <>
@@ -112,10 +120,15 @@ const HomePage: React.FC = () => {
                             <ForecastCards cards={selectedTrip.weekWeather} githubUrlImgs={githubUrlImgs} />
                         ) : null}
                     </div>
+                    {isOpenAlert ? (
+                        <div className='home__alert'>
+                            <SuccessAlert message='New trip is added!' />
+                        </div>
+                    ) : null}
                 </div>
                 <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
-                    {todayWeatherErr && <Error message="Sorry, smth is wrong..." /> }
+                    {todayWeatherErr && <Error message='Sorry, smth is wrong...' />}
                     {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
                         <Banner
                             city={selectedTrip.city}

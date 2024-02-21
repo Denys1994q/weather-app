@@ -1,3 +1,10 @@
+:root {
+    --main-grey: #888;
+    --light-grey: rgb(224, 224, 224);
+    --light-blue: rgb(231, 240, 243);
+    --main-red: #ca2424;
+}
+
 *,
 ::after,
 ::before {
@@ -75,7 +82,7 @@ ul {
     background: #f1f1f1;
 }  
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--main-grey);
 }  
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
