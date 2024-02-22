@@ -7,14 +7,19 @@ import { Trip } from "../../store/slices/models/trip";
 interface CityCardsProps {
     cities: Trip[];
     onCityClick: (cityId: string) => void;
+    onDeleteClick: (cityId: string) => void;
     activeCityId: string;
 }
 
-const CityCards: React.FC<CityCardsProps> = ({ cities, activeCityId, onCityClick }) => {
+const CityCards: React.FC<CityCardsProps> = ({ cities, activeCityId, onCityClick, onDeleteClick }) => {
     const containerRef = useRef<HTMLUListElement>(null);
 
     const handleCityClick = (cityId: string) => {
         onCityClick(cityId);
+    };
+
+    const handleDeleteClick = (cityId: string) => {
+        onDeleteClick(cityId);
     };
 
     const scrollToLeft = () => {
@@ -47,6 +52,7 @@ const CityCards: React.FC<CityCardsProps> = ({ cities, activeCityId, onCityClick
                                     endDate={transformDate(c.endDate)}
                                     isActive={c.id === activeCityId}
                                     onClick={() => handleCityClick(c.id)}
+                                    onDelete={() => handleDeleteClick(c.id)}
                                 />
                             </li>
                         ))}

@@ -9,7 +9,7 @@ import { useEffect, useState, useMemo } from "react";
 import { cities } from "../data/citiesData";
 import { useAppDispatch } from "../store/hooks";
 import { useAppSelector } from "../store/hooks";
-import { addTrip, selectTrip, setActiveFilter } from "../store/slices/trips";
+import { addTrip, deleteTrip, selectTrip, setActiveFilter } from "../store/slices/trips";
 import { Trip } from "../store/slices/models/trip";
 import { getTodaysWeather, getWeekWeather } from "../store/slices/trips";
 import Spinner from "../components/spinner/Spinner";
@@ -19,7 +19,7 @@ import SuccessAlert from "../components/success-alert/Success-alert";
 
 const HomePage: React.FC = () => {
     const dispatch = useAppDispatch();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOpenAlert, setIsOpenAlert] = useState(false);
     const trips = useAppSelector(store => store.trips.trips);
     const selectedTripId = useAppSelector(store => store.trips.selectedTripId);
@@ -54,22 +54,26 @@ const HomePage: React.FC = () => {
     }, [trips]);
 
     const handleCloseModal = () => {
-        setIsOpen(false);
+        setIsModalOpen(false);
     };
 
     const handleAddBtnClick = () => {
         setIsOpenAlert(false);
-        setIsOpen(true);
+        setIsModalOpen(true);
     };
 
     const handleSaveBtnClick = (formValues: { city: string; startDate: string; endDate: string }) => {
         dispatch(addTrip(formValues));
         setIsOpenAlert(true);
-        setIsOpen(false);
+        setIsModalOpen(false);
     };
 
     const handleCityClick = (id: string) => {
         dispatch(selectTrip(id));
+    };
+
+    const handleCityDeleteClick = (id: string) => {
+        dispatch(deleteTrip(id));
     };
 
     const handleSearchChange = (newValue: string) => {
@@ -107,6 +111,7 @@ const HomePage: React.FC = () => {
                                 cities={filteredSortTrips}
                                 activeCityId={selectedTripId}
                                 onCityClick={handleCityClick}
+                                onDeleteClick={handleCityDeleteClick}
                             />
                         </div>
                         <div className='cardsPanel__btn'>
@@ -142,7 +147,7 @@ const HomePage: React.FC = () => {
             </section>
             <CreateTripModal
                 cities={cities}
-                isOpen={isOpen}
+                isOpen={isModalOpen}
                 onSaveBtnClick={handleSaveBtnClick}
                 onClose={handleCloseModal}
             />

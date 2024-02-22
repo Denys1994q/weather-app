@@ -31,9 +31,6 @@ export const getWeekWeather = createAsyncThunk(
     }
 );
 
-const savedTrips = localStorage.getItem('trips');
-const trips = savedTrips ? JSON.parse(savedTrips) : [cities[0]];
-
 interface TripsState {
     trips: Trip[],
     selectedTripId: string,
@@ -43,6 +40,9 @@ interface TripsState {
     getWeekWeatherLoading: boolean,
     getWeekWeatherError: boolean
 }
+
+const savedTrips = localStorage.getItem('trips');
+const trips = savedTrips && JSON.parse(savedTrips).length > 0 ? JSON.parse(savedTrips) : [cities[0]];
 
 const initialState: TripsState = {
     trips: trips,
@@ -65,8 +65,12 @@ const TripsSlice = createSlice({
                 selectedCity.startDate = startDate
                 selectedCity.endDate = endDate
                 state.trips.push(selectedCity)
+                state.selectedTripId = selectedCity.id
             }
         }, 
+        deleteTrip: (state, action: PayloadAction<string>) => {
+            state.trips = state.trips.filter(t => t.id !== action.payload)
+        },
         selectTrip: (state, action: PayloadAction<string>) => {
             state.selectedTripId = action.payload
         },
@@ -140,4 +144,4 @@ const { actions, reducer } = TripsSlice;
 
 export default reducer;
 
-export const { addTrip, selectTrip, setActiveFilter } = actions;
+export const { addTrip, deleteTrip, selectTrip, setActiveFilter } = actions;
