@@ -1,3 +1,6 @@
+.required-label {
+    font-size: 14px;
+}
 .required-label::before {
     content: '*';
     color: red;

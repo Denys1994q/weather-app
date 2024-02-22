@@ -10,6 +10,7 @@
     position: relative;
 }
 .custom-select {
+    font-size: 14px;
     width: 100%;
     padding: 8px;
     border: 1px solid #d3d0d0;
