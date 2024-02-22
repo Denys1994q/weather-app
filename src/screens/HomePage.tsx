@@ -121,7 +121,7 @@ const HomePage: React.FC = () => {
                     <div className='home__forecast'>
                         {weekWeatherLoading && <Spinner />}
                         {weekWeatherErr && <Error message='Sorry, smth is wrong...' />}
-                        {selectedTrip && selectedTrip.weekWeather && !weekWeatherLoading ? (
+                        {selectedTrip && selectedTrip.weekWeather && !weekWeatherLoading && !weekWeatherErr ? (
                             <ForecastCards cards={selectedTrip.weekWeather} githubUrlImgs={githubUrlImgs} />
                         ) : null}
                     </div>
@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
                 <div className='home__todayWeather'>
                     {todayWeatherLoading && <Spinner />}
                     {todayWeatherErr && <Error message='Sorry, smth is wrong...' />}
-                    {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading ? (
+                    {selectedTrip && selectedTrip.todayWeather && !todayWeatherLoading && !todayWeatherErr ? (
                         <Banner
                             city={selectedTrip.city}
                             day={dayOfWeek}

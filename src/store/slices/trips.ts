@@ -134,8 +134,8 @@ const TripsSlice = createSlice({
             }
         })
         .addCase(getWeekWeather.rejected, state => {
-            state.getTodaysWeatherLoading = false;
-            state.getTodaysWeatherError = true;
+            state.getWeekWeatherLoading = false;
+            state.getWeekWeatherError = true;
         })
     }
 })
