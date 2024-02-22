@@ -12,7 +12,7 @@
 .card__info {
     padding: 20px;
     border: 2px solid var(--light-grey);;
-    border-top: 2px solid transparent
+    border-top: none;
 }
 .card__title {
     font-size: 14px;
@@ -24,7 +24,7 @@
 }
 .card__info.active {
     border: 2px solid rgb(151, 225, 243);
-    border-top: 2px solid transparent
+    border-top: none;
 }
 .card__deleteBtn {
     position: absolute;
